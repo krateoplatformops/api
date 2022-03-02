@@ -5,8 +5,8 @@ on:
     branches: "**"
 
 env:
-  IMAGE_NAME: api
-  IMAGE_TAG: latest
+  IMAGE_NAME: "api"
+  IMAGE_TAG: "latest"
 
 jobs:
   push:
