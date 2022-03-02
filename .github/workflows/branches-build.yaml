@@ -13,6 +13,10 @@ jobs:
     name: Create docker image
     runs-on: ubuntu-latest
     steps:
+      - name: step-1
+        run: echo "${IMAGE_NAME}"
+      - name: step-2
+        run: echo "${IMAGE_TAG}"
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@master
