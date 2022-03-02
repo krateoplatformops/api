@@ -36,7 +36,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/krateoplatformops/$IMAGE_NAME:$IMAGE_TAG
+          tags: "ghcr.io/krateoplatformops/$IMAGE_NAME:$IMAGE_TAG"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
