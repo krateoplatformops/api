@@ -1,4 +1,4 @@
-const authConstants = require('../constants/auth.constants')
+const { authConstants, envConstants } = require('../constants')
 
 module.exports = async (req, res, next) => {
   authConstants.unsecurePaths.forEach((r) => {
@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
     return
   }
 
-  if (!req.signedCookies[process.env.COOKIE_NAME]) {
+  if (!req.signedCookies[envConstants.COOKIE_NAME]) {
     const err = new Error('Unauthorized')
     err.statusCode = 401
     next(err)

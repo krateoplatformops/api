@@ -1,3 +1,3 @@
 module.exports = {
-  unsecurePaths: ['/', '/config/*', '/auth/*', '/ping']
+  unsecurePaths: ['/', '/config/*', '/auth/*', '/ping', '/test/*']
 }

@@ -6,13 +6,10 @@ const uriHelpers = require('../../helpers/uri.helpers')
 
 router.get('/', async (req, res, next) => {
   try {
-    const url = uriHelpers.concatUrl([
-      envConstants.DATASTORE_URI,
-      '/provider?enabled=true'
-    ])
+    const url = uriHelpers.concatUrl([envConstants.DATASTORE_URI, '/template'])
 
-    const providers = await axios.get(url)
-    res.status(200).json({ providers: providers.data })
+    const templates = await axios.get(url)
+    res.status(200).json(templates.data)
   } catch (error) {
     next(error)
   }

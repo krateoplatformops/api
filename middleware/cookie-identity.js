@@ -1,6 +1,7 @@
 const { logger } = require('../helpers/logger.helpers')
 
 const jwtHelpers = require('../helpers/jwt.helpers')
+const envConstants = require('../constants/env.constants')
 
 module.exports = (req, res, next) => {
   if (res.locals.allowAnonymous) {
@@ -9,7 +10,7 @@ module.exports = (req, res, next) => {
   }
 
   try {
-    const cookieValue = req.signedCookies[process.env.COOKIE_NAME]
+    const cookieValue = req.signedCookies[envConstants.COOKIE_NAME]
     const identity = jwtHelpers.verify(cookieValue)
 
     res.locals.identity = identity
