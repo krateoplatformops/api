@@ -4,15 +4,16 @@ const router = express.Router()
 const { envConstants } = require('../../constants')
 const uriHelpers = require('../../helpers/uri.helpers')
 
-router.get('/', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const url = uriHelpers.concatUrl([
       envConstants.DATASTORE_URI,
-      '/provider?enabled=true'
+      '/template',
+      req.params.id
     ])
 
-    const providers = await axios.get(url)
-    res.status(200).json({ providers: providers.data })
+    const templates = await axios.delete(url)
+    res.status(200).json(templates.data)
   } catch (error) {
     next(error)
   }
