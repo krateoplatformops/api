@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "nats": "^2.6.1",
+    "nunjucks": "^3.2.3",
     "passport-github2": "^0.1.12",
     "passport-microsoft": "^0.1.0",
     "path-value": "^0.9.4",

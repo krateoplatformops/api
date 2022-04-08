@@ -48,7 +48,7 @@ const configRoutes = require('./routes/config.routes')
 const userRoutes = require('./routes/user.routes')
 const registerRoutes = require('./routes/register.routes')
 const templateRoutes = require('./routes/template.routes')
-const deployRoutes = require('./routes/deploy.routes')
+const deploymentRoutes = require('./routes/deployment.routes')
 
 app.use('/', baseRoutes)
 app.use('/auth', authRoutes)
@@ -56,7 +56,7 @@ app.use('/config', configRoutes)
 app.use('/user', userRoutes)
 app.use('/register', registerRoutes)
 app.use('/template', templateRoutes)
-app.use('/deploy', deployRoutes)
+app.use('/deployment', deploymentRoutes)
 
 app.use(errorLogger)
 

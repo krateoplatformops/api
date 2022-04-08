@@ -1,20 +1,38 @@
 const axios = require('axios')
 const uriHelpers = require('./uri.helpers')
+const stringHelpers = require('./string.helpers')
+const { envConstants } = require('../constants')
 
-const downloadFile = async (parsed) => {
+const downloadFile = async (
+  parsed,
+  fileName = parsed.pathList[parsed.pathList.length - 1]
+) => {
+  // get host settings
+  const url = uriHelpers.concatUrl([
+    envConstants.DATASTORE_URI,
+    '/host/domain/',
+    parsed.domain
+  ])
+  const host = (await axios.get(url)).data
+
+  if (!host) {
+    throw new Error('Unsupported domain')
+  }
+
   const api = uriHelpers.concatUrl([
-    'https://api.github.com/repos/',
+    host.apiUrl,
+    'repos/',
     parsed.pathList[0],
     parsed.pathList[1],
     'contents',
-    parsed.pathList[parsed.pathList.length - 1]
+    fileName
   ])
   const response = await axios.get(api, {
     headers: {
-      Authorization: `token ${process.env.GITHUB_TOKEN}`
+      Authorization: `token ${stringHelpers.b64toAscii(host.apiToken)}`
     }
   })
-  return Buffer.from(response.data.content, 'base64').toString('ascii')
+  return stringHelpers.b64toAscii(response.data.content)
 }
 
 module.exports = {
