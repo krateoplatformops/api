@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
+
 const { envConstants } = require('../../constants')
 const axiosInstance = require('../../axios-conf')
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    const templates = await axiosInstance.get(envConstants.TEMPLATE_URI)
+    const host = await axiosInstance.post(envConstants.HOST_URI, req.body)
 
-    res.status(200).json(templates.data)
+    res.status(200).json(host.data)
   } catch (error) {
     next(error)
   }

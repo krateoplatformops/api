@@ -6,11 +6,14 @@ const uriHelpers = require('../../helpers/uri.helpers')
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const url = uriHelpers.concatUrl([envConstants.TEMPLATE_URI, req.params.id])
+    const url = uriHelpers.concatUrl([
+      envConstants.DEPLOYMENT_URI,
+      req.params.id
+    ])
 
-    const template = await axiosInstance.delete(url)
+    const deployment = await axiosInstance.delete(url)
 
-    res.status(200).json(template.data)
+    res.status(200).json(deployment.data)
   } catch (error) {
     next(error)
   }

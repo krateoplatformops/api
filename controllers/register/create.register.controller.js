@@ -19,9 +19,21 @@ router.post('/', async (req, res, next) => {
     }
     const parsed = uriHelpers.parse(url)
 
+    // get host settings
+    const hostUrl = uriHelpers.concatUrl([
+      envConstants.HOST_URI,
+      '/domain/',
+      parsed.domain
+    ])
+    const host = (await axios.get(hostUrl)).data
+
+    if (!host) {
+      throw new Error('Unsupported domain')
+    }
+
     switch (parsed.domain) {
       case 'github.com':
-        content = await gitHubHelpers.downloadFile(parsed)
+        content = await gitHubHelpers.downloadFile(host, parsed)
         break
       default:
         throw new Error('Unsupported domain')
@@ -44,10 +56,7 @@ router.post('/', async (req, res, next) => {
     let save = null
     switch (doc.kind) {
       case 'Template':
-        save = await axios.post(
-          uriHelpers.concatUrl([envConstants.DATASTORE_URI, 'template']),
-          post
-        )
+        save = await axios.post(envConstants.TEMPLATE_URI, post)
         break
       default:
         throw new Error(`Unsupported kind ${doc.kind}`)

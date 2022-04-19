@@ -9,4 +9,8 @@ router.get('/ping', (req, res) => {
   res.status(200).send('Krateo Api')
 })
 
+router.get('/healthz', (req, res) => {
+  res.status(200).send('Krateo Api')
+})
+
 module.exports = router

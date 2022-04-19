@@ -15,10 +15,16 @@ const concatUrl = (params) => {
 }
 
 const parse = (url) => {
+  let schema = ''
+  if (url.indexOf('://') > -1) {
+    const parts = url.split('://')
+    schema = parts[0]
+  }
   if (url.indexOf('://') > -1) {
     url = url.split('://')[1]
   }
   return {
+    schema,
     domain: url.split('/')[0].toLowerCase(),
     path: concatUrl(url.split('/').slice(1)),
     pathList: concatUrl(url.split('/').slice(1)).split('/')

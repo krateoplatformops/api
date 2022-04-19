@@ -23,19 +23,20 @@ app.use(express.urlencoded({ extended: false }))
 app.use(responseTime({ suffix: false, digits: 0 }))
 
 /* Middleware */
-const callLogger = require('./middleware/call-logger')
-const providerMiddleware = require('./middleware/provider')
-const authMiddleware = require('./middleware/auth')
-const cookieIdentityMiddleware = require('./middleware/cookie-identity')
-const identityCheckerMiddleware = require('./middleware/identity-checker')
-
-const errorLogger = require('./middleware/error-logger')
+const callLogger = require('./middlewares/call-logger.middleware')
+const providerMiddleware = require('./middlewares/provider.middleware')
+const authMiddleware = require('./middlewares/auth.middleware')
+const cookieIdentityMiddleware = require('./middlewares/cookie-identity.middleware')
+const identityCheckerMiddleware = require('./middlewares/identity-checker.middleware')
+const axiosMiddleware = require('./middlewares/axios.middleware')
+const errorLoggerMiddleware = require('./middlewares/error-logger.middleware')
 
 app.use(callLogger)
 app.use(providerMiddleware)
 app.use(authMiddleware)
 app.use(cookieIdentityMiddleware)
 app.use(identityCheckerMiddleware)
+app.use(axiosMiddleware)
 
 /* Strategies */
 // const initStrategies = require('./init/passport.init')
@@ -49,6 +50,8 @@ const userRoutes = require('./routes/user.routes')
 const registerRoutes = require('./routes/register.routes')
 const templateRoutes = require('./routes/template.routes')
 const deploymentRoutes = require('./routes/deployment.routes')
+const proxyRoutes = require('./routes/proxy.routes')
+const hostRoutes = require('./routes/host.routes')
 
 app.use('/', baseRoutes)
 app.use('/auth', authRoutes)
@@ -57,7 +60,9 @@ app.use('/user', userRoutes)
 app.use('/register', registerRoutes)
 app.use('/template', templateRoutes)
 app.use('/deployment', deploymentRoutes)
+app.use('/proxy', proxyRoutes)
+app.use('/host', hostRoutes)
 
-app.use(errorLogger)
+app.use(errorLoggerMiddleware)
 
 module.exports = app
