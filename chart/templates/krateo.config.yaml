@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  COOKIE_HTTPONLY: {{ .Values.api.cookie.httpOnly | quote }}
+  COOKIE_SIGNED: {{ .Values.api.cookie.signed | quote }}
+  COOKIE_NAME: {{ .Values.api.cookie.name | quote }}
+  COOKIE_MAX_AGE: {{ .Values.api.cookie.maxAge | quote }}
+  COOKIE_SECURE: {{ .Values.api.cookie.secure | quote }}
+  COOKIE_DOMAIN: {{ .Values.api.cookie.domain | quote }}
+  COOKIE_SAMESITE: {{ .Values.api.cookie.sameSite | quote }}
+  LOG_LEVEL: {{ .Values.log.level | quote }}

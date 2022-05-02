@@ -6,11 +6,11 @@ const uriHelpers = require('../../helpers/uri.helpers')
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const url = uriHelpers.concatUrl([envConstants.PROXY_URI, req.params.id])
+    const url = uriHelpers.concatUrl([envConstants.ENDPOINT_URI, req.params.id])
 
-    const proxy = await axiosInstance.delete(url)
+    const endpoint = await axiosInstance.delete(url)
 
-    res.status(200).json(proxy.data)
+    res.status(200).json(endpoint.data)
   } catch (error) {
     next(error)
   }

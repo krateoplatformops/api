@@ -51,7 +51,7 @@ const registerRoutes = require('./routes/register.routes')
 const templateRoutes = require('./routes/template.routes')
 const deploymentRoutes = require('./routes/deployment.routes')
 const proxyRoutes = require('./routes/proxy.routes')
-const hostRoutes = require('./routes/host.routes')
+const endpointRoutes = require('./routes/endpoint.routes')
 
 app.use('/', baseRoutes)
 app.use('/auth', authRoutes)
@@ -61,7 +61,7 @@ app.use('/register', registerRoutes)
 app.use('/template', templateRoutes)
 app.use('/deployment', deploymentRoutes)
 app.use('/proxy', proxyRoutes)
-app.use('/host', hostRoutes)
+app.use('/endpoint', endpointRoutes)
 
 app.use(errorLoggerMiddleware)
 

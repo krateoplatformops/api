@@ -6,64 +6,31 @@ const path = require('path')
 const uriHelpers = require('../../helpers/uri.helpers')
 const gitHubHelpers = require('../../helpers/github.helpers')
 const { envConstants } = require('../../constants')
+const axiosInstance = require('../../axios-conf')
 
 router.post('/', async (req, res, next) => {
   try {
     let url = req.body.url
-    let doc = null
-    let content = null
-
-    // remove anchor from url
-    if (url.indexOf('#') > -1) {
-      url = url.split('#')[0]
-    }
-    const parsed = uriHelpers.parse(url)
-
-    // get host settings
-    const hostUrl = uriHelpers.concatUrl([
-      envConstants.HOST_URI,
-      '/domain/',
-      parsed.domain
-    ])
-    const host = (await axios.get(hostUrl)).data
-
-    if (!host) {
-      throw new Error('Unsupported domain')
-    }
-
-    switch (parsed.domain) {
-      case 'github.com':
-        content = await gitHubHelpers.downloadFile(host, parsed)
-        break
-      default:
-        throw new Error('Unsupported domain')
-    }
-
-    const ext = path.extname(url).replace(/(\.[a-z0-9]+).*/i, '$1')
-
-    if (ext === '.yml' || ext === '.yaml') {
-      doc = await yaml.load(content)
-    } else {
-      doc = JSON.parse(content)
-    }
-
-    // prepare payload
-    const post = {
-      ...doc,
-      url
-    }
-
+    let kind = null
     let save = null
-    switch (doc.kind) {
-      case 'Template':
-        save = await axios.post(envConstants.TEMPLATE_URI, post)
-        break
-      default:
-        throw new Error(`Unsupported kind ${doc.kind}`)
+
+    const fileName = path.basename(url)
+
+    if (fileName === 'claim.yaml') {
+      kind = 'deployment'
+      save = await axiosInstance.post(
+        uriHelpers.concatUrl([envConstants.DEPLOYMENT_URI, 'import']),
+        { url }
+      )
+    } else if (fileName === 'template.yaml') {
+      kind = 'template'
+      save = await axiosInstance.post(envConstants.TEMPLATE_URI, { url })
+    } else {
+      throw new Error(`Unsupported file name ${fileName}`)
     }
 
     if (save) {
-      res.status(200).json({ ...save.data, kind: doc.kind.toLowerCase() })
+      res.status(200).json({ ...save.data, kind })
     } else {
       res.status(500).json({
         message: save.data.message

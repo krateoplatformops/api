@@ -8,6 +8,5 @@ module.exports = {
   DATASTORE_URI: process.env.DATASTORE_URI,
   DEPLOYMENT_URI: process.env.DEPLOYMENT_URI,
   TEMPLATE_URI: process.env.TEMPLATE_URI,
-  HOST_URI: process.env.HOST_URI,
-  PROXY_URI: process.env.PROXY_URI
+  ENDPOINT_URI: process.env.ENDPOINT_URI
 }

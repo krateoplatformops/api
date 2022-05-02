@@ -6,9 +6,12 @@ const axiosInstance = require('../../axios-conf')
 
 router.post('/', async (req, res, next) => {
   try {
-    const host = await axiosInstance.post(envConstants.HOST_URI, req.body)
+    const endpoint = await axiosInstance.post(
+      envConstants.ENDPOINT_URI,
+      req.body
+    )
 
-    res.status(200).json(host.data)
+    res.status(200).json(endpoint.data)
   } catch (error) {
     next(error)
   }

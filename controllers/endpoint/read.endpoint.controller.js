@@ -5,9 +5,9 @@ const axiosInstance = require('../../axios-conf')
 
 router.get('/', async (req, res, next) => {
   try {
-    const hosts = await axiosInstance.get(envConstants.HOST_URI)
+    const endpoints = await axiosInstance.get(envConstants.ENDPOINT_URI)
 
-    res.status(200).json(hosts.data)
+    res.status(200).json(endpoints.data)
   } catch (error) {
     next(error)
   }

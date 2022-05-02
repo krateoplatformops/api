@@ -1,0 +1,18 @@
+registry:
+  images:
+    api: ghcr.io/krateoplatformops/api:latest
+
+log:
+  level: "info"
+
+api:
+  baseUrl: https://api.krateo.site/
+  cookie:
+    secret: "krateo-site"
+    httpOnly: "true"
+    signed: "true"
+    name: "krateo-platformops"
+    maxAge: "604800" # 7 days
+    secure: "true"
+    domain: "krateo.site"
+    sameSite: "Strict"

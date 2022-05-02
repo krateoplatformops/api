@@ -3,12 +3,12 @@ const uriHelpers = require('./uri.helpers')
 const stringHelpers = require('./string.helpers')
 
 const downloadFile = async (
-  host,
+  endpoint,
   parsed,
   fileName = parsed.pathList[parsed.pathList.length - 1]
 ) => {
   const api = uriHelpers.concatUrl([
-    host.apiUrl,
+    endpoint.target,
     'repos/',
     parsed.pathList[0],
     parsed.pathList[1],
@@ -16,9 +16,7 @@ const downloadFile = async (
     fileName
   ])
   const response = await axios.get(api, {
-    headers: {
-      Authorization: `token ${stringHelpers.b64toAscii(host.apiToken)}`
-    }
+    headers: endpoint.headers
   })
   return stringHelpers.b64toAscii(response.data.content)
 }
