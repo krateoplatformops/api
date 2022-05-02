@@ -11,3 +11,8 @@ data:
   COOKIE_DOMAIN: {{ .Values.api.cookie.domain | quote }}
   COOKIE_SAMESITE: {{ .Values.api.cookie.sameSite | quote }}
   LOG_LEVEL: {{ .Values.log.level | quote }}
+  APP_URI: {{ .Values.api.uris.app | quote }}
+  DATASTORE_URI: {{ .Values.api.uris.datastore | quote }}
+  DEPLOYMENT_URI: {{ .Values.api.uris.deployment | quote }}
+  TEMPLATE_URI: {{ .Values.api.uris.template | quote }}
+  ENDPOINT_URI: {{ .Values.api.uris.endpoint | quote }}

@@ -1,0 +1,18 @@
+apiVersion: v2
+name: api-krateo
+description: Krateo PlatformOps Api
+type: application
+
+version: 0.1.0
+appVersion: 0.1.0
+
+# dependencies:
+#   - name: "mongodb"
+#     version: "10.30.12"
+#     repository: https://charts.bitnami.com/bitnami
+#     condition: mongodb.install
+
+maintainers:
+  - name: Mauro Sala
+    email: mauro.sala@kiratech.it
+    url: https://krateo.io
