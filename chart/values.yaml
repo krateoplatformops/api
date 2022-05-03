@@ -3,7 +3,7 @@ registry:
     api: ghcr.io/krateoplatformops/api:latest
 
 log:
-  level: "info"
+  level: "debug"
 
 api:
   baseUrl: https://api.krateo.site/

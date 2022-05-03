@@ -5,6 +5,7 @@ const uriHelpers = require('../../helpers/uri.helpers')
 
 const { envConstants } = require('../../constants')
 const axiosInstance = require('../../axios-conf')
+const { logger } = require('../../helpers/logger.helpers')
 
 router.post('/', async (req, res, next) => {
   try {
