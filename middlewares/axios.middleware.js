@@ -1,4 +1,5 @@
 const axiosInstance = require('../axios-conf')
+const { logger } = require('../helpers/logger.helpers')
 
 module.exports = (req, res, next) => {
   let payload = {
@@ -9,16 +10,19 @@ module.exports = (req, res, next) => {
     Expires: '0'
   }
 
+  logger.debug(JSON.stringify(res.locals.identity))
+
   if (res.locals.identity) {
     payload = { ...payload, identity: JSON.stringify(res.locals.identity) }
   }
 
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      config.headers = payload
-      return config
-    },
-    (error) => Promise.reject(error)
-  )
+  axiosInstance.defaults.headers = payload
+  // axiosInstance.interceptors.request.use(
+  //   (config) => {
+  //     config.headers = payload
+  //     return config
+  //   },
+  //   (error) => Promise.reject(error)
+  // )
   next()
 }
