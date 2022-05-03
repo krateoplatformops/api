@@ -17,12 +17,5 @@ module.exports = (req, res, next) => {
   }
 
   axiosInstance.defaults.headers = payload
-  // axiosInstance.interceptors.request.use(
-  //   (config) => {
-  //     config.headers = payload
-  //     return config
-  //   },
-  //   (error) => Promise.reject(error)
-  // )
   next()
 }

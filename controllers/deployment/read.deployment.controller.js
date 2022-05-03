@@ -15,6 +15,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const deployments = await axiosInstance.get(
+      uriHelpers.concatUrl([envConstants.DEPLOYMENT_URI, req.params.id])
+    )
+
+    res.status(200).json(deployments.data)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/:id/plugins/:plugin/:name', async (req, res, next) => {
   try {
     const url = new URL(

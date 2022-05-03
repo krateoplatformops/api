@@ -7,5 +7,6 @@ module.exports = {
   DATASTORE_URI: process.env.DATASTORE_URI,
   DEPLOYMENT_URI: process.env.DEPLOYMENT_URI,
   TEMPLATE_URI: process.env.TEMPLATE_URI,
-  ENDPOINT_URI: process.env.ENDPOINT_URI
+  ENDPOINT_URI: process.env.ENDPOINT_URI,
+  LOG_URI: process.env.LOG_URI
 }
