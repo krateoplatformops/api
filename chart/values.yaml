@@ -7,6 +7,7 @@ log:
 
 api:
   baseUrl: https://api.krateo.site/
+  host: "api.krateo.site"
   cookie:
     secret: "krateo-site"
     httpOnly: "true"
@@ -17,8 +18,4 @@ api:
     domain: "krateo.site"
     sameSite: "Strict"
   uris:
-    datastore: "http://datastore-svc.krateo-dev.svc"
-    deployment: "http://deployment-svc.krateo-dev.svc"
-    template: "http://template-svc.krateo-dev.svc"
-    endpoint: "http://endpoint-svc.krateo-dev.svc"
-    app: "https://krateo.site"
+    app: "https://app.krateo.site"

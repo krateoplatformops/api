@@ -36,6 +36,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: api-config
+            - configMapRef:
+                name: krateo-uri-config
           env:
             - name: 'MONGODB_URI'
               valueFrom:

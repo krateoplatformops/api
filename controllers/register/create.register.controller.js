@@ -1,10 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const yaml = require('js-yaml')
-const axios = require('axios')
 const path = require('path')
 const uriHelpers = require('../../helpers/uri.helpers')
-const gitHubHelpers = require('../../helpers/github.helpers')
+
 const { envConstants } = require('../../constants')
 const axiosInstance = require('../../axios-conf')
 
@@ -28,6 +26,8 @@ router.post('/', async (req, res, next) => {
     } else {
       throw new Error(`Unsupported file name ${fileName}`)
     }
+
+    logger.debug(JSON.stringify(save.data))
 
     if (save) {
       res.status(200).json({ ...save.data, kind })
