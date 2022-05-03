@@ -15,6 +15,8 @@ router.post('/', async (req, res, next) => {
 
     const fileName = path.basename(url)
 
+    logger.debug(`Registering ${fileName}`)
+
     if (fileName === 'claim.yaml') {
       kind = 'deployment'
       save = await axiosInstance.post(
