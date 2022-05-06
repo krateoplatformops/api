@@ -12,7 +12,12 @@ const daysAgo = (days) => {
     .unix()
 }
 
+const startOfDay = (time) => {
+  return moment.unix(time).startOf('day').unix()
+}
+
 module.exports = {
   currentTime,
-  daysAgo
+  daysAgo,
+  startOfDay
 }

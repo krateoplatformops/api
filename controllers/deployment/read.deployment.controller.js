@@ -41,7 +41,6 @@ router.get('/:id/plugins/:plugin/:name', async (req, res, next) => {
     Object.keys(req.query).forEach((key) =>
       url.searchParams.append(key, req.query[key])
     )
-    console.log(url.toString())
     logger.debug(`GET ${url.toString()}`)
 
     const deployment = await axiosInstance.get(url.toString())
