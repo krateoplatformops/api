@@ -35,7 +35,9 @@ router.get('/:name/*', async (req, res, next) => {
 
     axios
       .get(url.toString(), {
-        headers: endpoint.headers
+        headers: {
+          // FIXME: get headers dynamically from endpoint
+        }
       })
       .then((response) => {
         res.status(response.status).json(response.data)
