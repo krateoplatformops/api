@@ -9,11 +9,10 @@ const { logger } = require('../../helpers/logger.helpers')
 
 router.post('/', async (req, res, next) => {
   try {
-    let url = req.body.url
     let kind = null
     let save = null
 
-    const fileName = path.basename(url)
+    const fileName = path.basename(req.body.url)
 
     logger.debug(`Registering ${fileName}`)
 
@@ -21,11 +20,13 @@ router.post('/', async (req, res, next) => {
       kind = 'deployment'
       save = await axiosInstance.post(
         uriHelpers.concatUrl([envConstants.DEPLOYMENT_URI, 'import']),
-        { url }
+        { ...req.body }
       )
     } else if (fileName === 'template.yaml') {
       kind = 'template'
-      save = await axiosInstance.post(envConstants.TEMPLATE_URI, { url })
+      save = await axiosInstance.post(envConstants.TEMPLATE_URI, {
+        ...req.body
+      })
     } else {
       throw new Error(`Unsupported file name ${fileName}`)
     }
