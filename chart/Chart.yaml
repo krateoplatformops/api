@@ -3,8 +3,8 @@ name: api
 description: Krateo PlatformOps Api
 type: application
 
-version: 0.1.0
-appVersion: 0.1.1
+version: VERSION
+appVersion: VERSION
 
 maintainers:
   - name: Mauro Sala
