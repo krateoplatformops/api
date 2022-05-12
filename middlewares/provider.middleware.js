@@ -14,11 +14,7 @@ module.exports = async (req, res, next) => {
   ) {
     const { id } = req.query
 
-    const url = uriHelpers.concatUrl([
-      envConstants.DATASTORE_URI,
-      'provider',
-      id
-    ])
+    const url = uriHelpers.concatUrl([envConstants.AUTH_URI, 'provider', id])
     const doc = await axios.get(url)
     const provider = doc.data
 
