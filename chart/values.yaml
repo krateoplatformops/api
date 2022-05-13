@@ -60,7 +60,7 @@ podContainerPorts:
 # put your env variables here
 podEnvFrom:
   - configMapRef:
-      name: api--cookie-config
+      name: api-cookie-config
   - configMapRef:
       name: krateo-uri-config
 
