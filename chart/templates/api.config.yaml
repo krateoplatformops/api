@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: api-cookie-config
 data:
-  COOKIE_HTTPONLY: {{ .Values.api.cookie.httpOnly | quote }}
-  COOKIE_SIGNED: {{ .Values.api.cookie.signed | quote }}
-  COOKIE_NAME: {{ .Values.api.cookie.name | quote }}
-  COOKIE_MAX_AGE: {{ .Values.api.cookie.maxAge | quote }}
-  COOKIE_SECURE: {{ .Values.api.cookie.secure | quote }}
-  COOKIE_DOMAIN: {{ .Values.api.cookie.domain | quote }}
-  COOKIE_SAMESITE: {{ .Values.api.cookie.sameSite | quote }}
+  COOKIE_HTTPONLY: {{ .Values.cookie.httpOnly | quote }}
+  COOKIE_SIGNED: {{ .Values.cookie.signed | quote }}
+  COOKIE_NAME: {{ .Values.cookie.name | quote }}
+  COOKIE_MAX_AGE: {{ .Values.cookie.maxAge | quote }}
+  COOKIE_SECURE: {{ .Values.cookie.secure | quote }}
+  COOKIE_DOMAIN: {{ .Values.cookie.domain | quote }}
+  COOKIE_SAMESITE: {{ .Values.cookie.sameSite | quote }}
   

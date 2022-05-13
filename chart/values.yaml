@@ -1,6 +1,17 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+cookie:
+  secret: "krateoplatformops-api-cookie"
+  name: "krateoplatformops"
+  path: "/"
+  domain: "krateo.site"
+  secure: "true"
+  httpOnly: "true"
+  sameSite: "Strict"
+  maxAge: "2592000"
+  signed: "true"
+
 replicaCount: 1
 
 image:
@@ -63,18 +74,6 @@ podEnvFrom:
       name: api-cookie-config
   - configMapRef:
       name: krateo-uri-config
-
-api:
-  cookie:
-    secret: "krateoplatformops-api-cookie"
-    name: "krateoplatformops"
-    path: "/"
-    domain: "krateo.site"
-    secure: "true"
-    httpOnly: "true"
-    sameSite: "Strict"
-    maxAge: "2592000"
-    signed: "true"
 
 podEnv:
   - name: LOG_LEVEL
