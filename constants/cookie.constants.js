@@ -4,5 +4,6 @@ module.exports = {
   secure: process.env.COOKIE_SECURE === 'true', // Indicates if the cookie should only be sent over SSL.
   maxAge: 1000 * process.env.COOKIE_MAX_AGE, // would expire after X seconds
   domain: process.env.COOKIE_DOMAIN, // The domain of the cookie
-  sameSite: process.env.COOKIE_SAMESITE ? process.env.COOKIE_SAMESITE : 'Strict' // The cookie should be sent only over HTTPS
+  sameSite: process.env.COOKIE_SAMESITE || 'Strict', // The cookie should be sent only over HTTPS
+  path: process.env.COOKIE_PATH || '/' // The path of the cookie
 }
