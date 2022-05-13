@@ -73,6 +73,8 @@ api:
     secure: "true"
     httpOnly: "true"
     sameSite: "Strict"
+    maxAge: "2592000"
+    signed: "true"
 
 podEnv:
   - name: LOG_LEVEL
