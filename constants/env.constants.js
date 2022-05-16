@@ -8,5 +8,6 @@ module.exports = {
   DEPLOYMENT_URI: process.env.DEPLOYMENT_URI,
   TEMPLATE_URI: process.env.TEMPLATE_URI,
   ENDPOINT_URI: process.env.ENDPOINT_URI,
-  LOG_URI: process.env.LOG_URI
+  LOG_URI: process.env.LOG_URI,
+  KUBERNETES_URI: process.env.KUBERNETES_URI
 }

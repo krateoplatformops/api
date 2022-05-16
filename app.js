@@ -54,6 +54,7 @@ const proxyRoutes = require('./routes/proxy.routes')
 const endpointRoutes = require('./routes/endpoint.routes')
 const logRoutes = require('./routes/log.routes')
 const dashboardRoutes = require('./routes/dashboard.routes')
+const packageRoutes = require('./routes/package.routes')
 
 app.use('/', baseRoutes)
 app.use('/auth', authRoutes)
@@ -66,6 +67,7 @@ app.use('/proxy', proxyRoutes)
 app.use('/endpoint', endpointRoutes)
 app.use('/log', logRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/package', packageRoutes)
 
 app.use(errorLoggerMiddleware)
 
