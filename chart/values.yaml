@@ -9,7 +9,7 @@ cookie:
   secure: "true"
   httpOnly: "true"
   sameSite: "Strict"
-  maxAge: "2592000"
+  maxAge: 2592000
   signed: "true"
 
 replicaCount: 1
