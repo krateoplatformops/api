@@ -5,13 +5,13 @@ const axiosInstance = require('../../axios-conf')
 const uriHelpers = require('../../helpers/uri.helpers')
 const { logger } = require('../../helpers/logger.helpers')
 
-router.all('/:id/plugins/:plugin/:name', async (req, res, next) => {
+router.all('/plugins/:id/:plugin/:name', async (req, res, next) => {
   try {
     const url = new URL(
       uriHelpers.concatUrl([
         envConstants.DEPLOYMENT_URI,
-        req.params.id,
         'plugins',
+        req.params.id,
         req.params.plugin,
         req.params.name
       ])

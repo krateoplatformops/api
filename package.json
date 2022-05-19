@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "0.1.2",
+  "version": "VERSION",
   "description": "",
   "main": "index.js",
   "scripts": {
