@@ -1,3 +1,3 @@
 module.exports = {
-  noLoggingPath: ['/', '/ping', '/healthz', '/api-docs/*', '/component']
+  noLoggingPath: ['/', '/ping', '/healthz']
 }

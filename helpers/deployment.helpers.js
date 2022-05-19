@@ -1,17 +1,15 @@
-const express = require('express')
-const router = express.Router()
-const { envConstants } = require('../../constants')
-const axiosInstance = require('../../axios-conf')
-const uriHelpers = require('../../helpers/uri.helpers')
-const { logger } = require('../../helpers/logger.helpers')
+const { envConstants } = require('./../constants')
+const axiosInstance = require('./../axios-conf')
+const uriHelpers = require('./../helpers/uri.helpers')
+const { logger } = require('./../helpers/logger.helpers')
 
-router.all('/plugins/:id/:plugin/:name', async (req, res, next) => {
+const pluginReader = async (req, res, next) => {
   try {
     const url = new URL(
       uriHelpers.concatUrl([
         envConstants.DEPLOYMENT_URI,
-        'plugins',
         req.params.id,
+        'plugins',
         req.params.plugin,
         req.params.name
       ])
@@ -30,6 +28,8 @@ router.all('/plugins/:id/:plugin/:name', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}
 
-module.exports = router
+module.exports = {
+  pluginReader
+}
