@@ -15,17 +15,19 @@ router.get('/', async (req, res, next) => {
           name: v.replace('_URI', '')
         }
         return axiosInstance
-          .get(uriHelpers.concatUrl([process.env[v], 'ping']))
+          .get(uriHelpers.concatUrl([process.env[v], 'healthz']))
           .then((result) => {
-            payload.status = result.status
             if (result.data.name) {
               payload.name = result.data.name
               payload.version = result.data.version
             }
+            payload.status = result.status
+            payload.statusText = result.statusText
             return payload
           })
           .catch((err) => {
-            payload.status = err.status
+            payload.status = err.response.status
+            payload.statusText = err.response.statusText
             return payload
           })
       })
@@ -34,12 +36,12 @@ router.get('/', async (req, res, next) => {
     content.push({
       name: packageJson.name,
       version: packageJson.version,
-      status: 200
+      status: 200,
+      statusText: 'OK'
     })
 
     res.status(200).json(content)
   } catch (error) {
-    console.log(error)
     next(error)
   }
 })
