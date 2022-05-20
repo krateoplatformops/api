@@ -1,9 +1,11 @@
-const { envConstants } = require('./../constants')
-const axiosInstance = require('./../axios-conf')
-const uriHelpers = require('./../helpers/uri.helpers')
-const { logger } = require('./../helpers/logger.helpers')
+const express = require('express')
+const router = express.Router()
+const { envConstants } = require('../../constants')
+const axiosInstance = require('../../axios-conf')
+const uriHelpers = require('../../helpers/uri.helpers')
+const { logger } = require('../../helpers/logger.helpers')
 
-const pluginReader = async (req, res, next) => {
+router.all('/:id/plugins/:plugin/:name', async (req, res, next) => {
   try {
     const url = new URL(
       uriHelpers.concatUrl([
@@ -28,8 +30,6 @@ const pluginReader = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-}
+})
 
-module.exports = {
-  pluginReader
-}
+module.exports = router

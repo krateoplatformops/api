@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const axiosInstance = require('../../axios-conf')
 const uriHelpers = require('../../helpers/uri.helpers')
-
+const packageJson = require('../../package.json')
 router.get('/', async (req, res, next) => {
   try {
     const components = Object.keys(process.env).filter(
@@ -30,6 +30,12 @@ router.get('/', async (req, res, next) => {
           })
       })
     )
+
+    content.push({
+      name: packageJson.name,
+      version: packageJson.version,
+      status: 200
+    })
 
     res.status(200).json(content)
   } catch (error) {

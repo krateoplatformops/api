@@ -3,7 +3,6 @@ const router = express.Router()
 const { envConstants } = require('../../constants')
 const axiosInstance = require('../../axios-conf')
 const uriHelpers = require('../../helpers/uri.helpers')
-const deploymentHelper = require('../../helpers/deployment.helpers')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -25,10 +24,6 @@ router.get('/:id', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
-
-router.get('/:id/plugins/:plugin/:name', async (req, res, next) => {
-  deploymentHelper.pluginReader(req, res, next)
 })
 
 module.exports = router
