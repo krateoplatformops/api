@@ -26,8 +26,13 @@ router.get('/', async (req, res, next) => {
             return payload
           })
           .catch((err) => {
-            payload.status = err.response.status
-            payload.statusText = err.response.statusText
+            try {
+              payload.status = err.response.status
+              payload.statusText = err.response.statusText
+            } catch {
+              payload.status = 500
+              payload.statusText = err.code
+            }
             return payload
           })
       })
