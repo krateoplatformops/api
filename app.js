@@ -56,6 +56,7 @@ const logRoutes = require('./routes/log.routes')
 const dashboardRoutes = require('./routes/dashboard.routes')
 const packageRoutes = require('./routes/package.routes')
 const componentRoutes = require('./routes/component.routes')
+const secretRoutes = require('./routes/secret.routes')
 
 app.use('/', baseRoutes)
 app.use('/auth', authRoutes)
@@ -70,6 +71,7 @@ app.use('/log', logRoutes)
 app.use('/dashboard', dashboardRoutes)
 app.use('/package', packageRoutes)
 app.use('/component', componentRoutes)
+app.use('/secret', secretRoutes)
 
 app.use(errorLoggerMiddleware)
 
