@@ -10,5 +10,6 @@ module.exports = {
   ENDPOINT_URI: process.env.ENDPOINT_URI,
   LOG_URI: process.env.LOG_URI,
   KUBERNETES_URI: process.env.KUBERNETES_URI,
-  SECRET_URI: process.env.SECRET_URI
+  SECRET_URI: process.env.SECRET_URI,
+  PROVIDER_URI: process.env.PROVIDER_URI
 }
