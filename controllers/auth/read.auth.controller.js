@@ -85,7 +85,8 @@ router.get(
 
 router.get('/logout', async (req, res, next) => {
   try {
-    res.clearCookie(envConstants.COOKIE_NAME, { maxAge: 0 })
+    // res.clearCookie(envConstants.COOKIE_NAME, { maxAge: 0 })
+    res.cookie(envConstants.COOKIE_NAME, { expires: Date.now() })
     res.status(200).send()
   } catch (error) {
     next(error)

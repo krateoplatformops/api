@@ -5,6 +5,7 @@ const cors = require('cors')({ origin: true, credentials: true })
 const responseTime = require('response-time')
 const passport = require('passport')
 const { envConstants } = require('./constants')
+const session = require('express-session')
 
 passport.serializeUser((user, done) => {
   done(null, user)
@@ -16,6 +17,13 @@ passport.deserializeUser((obj, done) => {
 const app = express()
 app.use(helmet())
 app.use(cors)
+app.use(
+  session({
+    secret: envConstants.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+)
 app.use(passport.initialize())
 app.use(cookieParser(envConstants.COOKIE_SECRET))
 app.use(express.json())
@@ -37,10 +45,6 @@ app.use(authMiddleware)
 app.use(cookieIdentityMiddleware)
 app.use(identityCheckerMiddleware)
 app.use(axiosMiddleware)
-
-/* Strategies */
-// const initStrategies = require('./init/passport.init')
-// initStrategies()
 
 /* Routes */
 const baseRoutes = require('./routes/base.routes')

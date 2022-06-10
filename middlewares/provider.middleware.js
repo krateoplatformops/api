@@ -3,6 +3,7 @@ const passport = require('passport')
 const { logger } = require('../helpers/logger.helpers')
 const GitHubStrategy = require('passport-github2').Strategy
 const MicrosoftStrategy = require('passport-microsoft').Strategy
+const LdapStrategy = require('passport-ldapauth').Strategy
 const { envConstants } = require('../constants')
 const uriHelpers = require('../helpers/uri.helpers')
 
@@ -62,8 +63,11 @@ module.exports = async (req, res, next) => {
               )
             )
             break
+          case 'ldap':
+            passport.use(new LdapStrategy(config))
+            break
           default:
-            logger.error(`${doc.provider} strategy not supported`)
+            logger.error(`${provider.strategy} strategy not supported`)
         }
         next()
       }
