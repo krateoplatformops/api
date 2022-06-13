@@ -27,7 +27,9 @@ module.exports = async (req, res, next) => {
         const config = JSON.parse(
           Buffer.from(provider.config, 'base64').toString('ascii')
         )
-        config.callbackURL = `/auth/${provider.strategy}/callback`
+        if (provider.type === 'oauth') {
+          config.callbackURL = `/auth/${provider.strategy}/callback`
+        }
         logger.debug(
           `${provider.strategy} strategy config: ${JSON.stringify(
             config,
@@ -65,6 +67,17 @@ module.exports = async (req, res, next) => {
             break
           case 'ldap':
             passport.use(new LdapStrategy(config))
+            break
+          case 'basic':
+            console.log(req.body)
+            console.log(config)
+
+            if (JSON.stringify(config) !== JSON.stringify(req.body)) {
+              const err = new Error(`Username or password is incorrect`)
+              err.statusCode = 500
+              next(err)
+            }
+
             break
           default:
             logger.error(`${provider.strategy} strategy not supported`)

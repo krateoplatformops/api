@@ -29,4 +29,18 @@ router.post(
   }
 )
 
+router.post('/basic', (req, res) => {
+  const user = {
+    id: req.body.username,
+    username: req.body.username,
+    provider: 'basic',
+    email: `${req.body.username}@krateo.io`
+  }
+
+  logger.info(JSON.stringify(user, null, 2))
+
+  res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
+  res.status(200).send(user)
+})
+
 module.exports = router
