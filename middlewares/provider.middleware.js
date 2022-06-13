@@ -69,15 +69,11 @@ module.exports = async (req, res, next) => {
             passport.use(new LdapStrategy(config))
             break
           case 'basic':
-            console.log(req.body)
-            console.log(config)
-
             if (JSON.stringify(config) !== JSON.stringify(req.body)) {
               const err = new Error(`Username or password is incorrect`)
               err.statusCode = 500
               next(err)
             }
-
             break
           default:
             logger.error(`${provider.strategy} strategy not supported`)
