@@ -12,7 +12,13 @@ router.get('/', async (req, res, next) => {
     ])
 
     const providers = await axios.get(url)
-    res.status(200).json({ providers: providers.data })
+
+    res.status(200).json({
+      providers: providers.data.map((x) => {
+        delete x.config
+        return x
+      })
+    })
   } catch (error) {
     next(error)
   }
