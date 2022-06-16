@@ -5,8 +5,8 @@ const uriHelpers = require('../../helpers/uri.helpers')
 const packageJson = require('../../package.json')
 router.get('/', async (req, res, next) => {
   try {
-    const components = Object.keys(process.env).filter(
-      (x) => x.endsWith('_URI') && x !== 'API_URI' && x !== 'APP_URI'
+    const components = Object.keys(process.env).filter((x) =>
+      x.endsWith('_URI')
     )
 
     content = await Promise.all(
