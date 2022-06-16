@@ -4,7 +4,6 @@ const passport = require('passport')
 
 const { cookieConstants, envConstants } = require('../../constants')
 const jwtHelpers = require('../../helpers/jwt.helpers')
-const uriHelpers = require('../../helpers/uri.helpers')
 
 router.get('/guest', async (req, res, next) => {
   try {
@@ -16,14 +15,12 @@ router.get('/guest', async (req, res, next) => {
         email: 'guest@krateo.io'
       }
 
-      const redirect = uriHelpers.concatUrl([res.locals.redirect, 'dashboard'])
-
       res.cookie(
         envConstants.COOKIE_NAME,
         jwtHelpers.sign(user),
         cookieConstants
       )
-      res.redirect(redirect || '/')
+      res.redirect(res.locals.redirect)
     } else {
       res.status(401).send()
     }
@@ -54,10 +51,8 @@ router.get(
       user.email = req.user.emails[0].value
     } catch {}
 
-    const redirect = uriHelpers.concatUrl([res.locals.redirect, 'dashboard'])
-
     res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
-    res.redirect(redirect || '/')
+    res.redirect(res.locals.redirect)
   }
 )
 
@@ -84,10 +79,8 @@ router.get(
       user.email = req.user.emails[0].value
     } catch {}
 
-    const redirect = uriHelpers.concatUrl([res.locals.redirect, 'dashboard'])
-
     res.cookie(process.env.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
-    res.redirect(redirect || '/')
+    res.redirect(res.locals.redirect)
   }
 )
 
