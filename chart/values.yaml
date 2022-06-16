@@ -78,8 +78,6 @@ podEnvFrom:
 podEnv:
   - name: LOG_LEVEL
     value: info
-  - name: APP_URI
-    value: "https://app.krateo.site"
   - name: "COOKIE_SECRET"
     valueFrom:
       secretKeyRef:
