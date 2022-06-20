@@ -5,6 +5,7 @@ const passport = require('passport')
 const { cookieConstants, envConstants } = require('../../constants')
 const jwtHelpers = require('../../helpers/jwt.helpers')
 const authHelpers = require('../../helpers/auth.helpers')
+const { logger } = require('../../helpers/logger.helpers')
 
 router.get('/guest', async (req, res, next) => {
   try {
@@ -44,6 +45,8 @@ router.get(
   (req, res) => {
     const user = authHelpers.cookie(req.user, 'github')
 
+    logger.info(JSON.stringify(user, null, 2))
+
     res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
     res.redirect(global.redirect)
   }
@@ -62,6 +65,8 @@ router.get(
   }),
   (req, res) => {
     const user = authHelpers.cookie(req.user, 'microsoft')
+
+    logger.info(JSON.stringify(user, null, 2))
 
     res.cookie(process.env.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
     res.redirect(global.redirect)

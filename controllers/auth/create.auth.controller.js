@@ -12,9 +12,10 @@ router.post(
   (req, res) => {
     const user = {
       id: res.req.user.uid,
-      username: res.req.user.displayName,
+      displayName: res.req.user.displayName,
+      username: res.req.user.username,
       provider: 'ldap',
-      email: res.req.user.displayName
+      email: null
     }
     try {
       user.email = Array.isArray(res.req.user.mail)
@@ -32,6 +33,7 @@ router.post(
 router.post('/basic', (req, res) => {
   const user = {
     id: req.body.username,
+    displayName: req.body.username,
     username: req.body.username,
     provider: 'basic',
     email: `${req.body.username}@krateo.io`
