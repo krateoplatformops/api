@@ -4,6 +4,7 @@ const passport = require('passport')
 
 const { cookieConstants, envConstants } = require('../../constants')
 const jwtHelpers = require('../../helpers/jwt.helpers')
+const authHelpers = require('../../helpers/auth.helpers')
 
 router.get('/guest', async (req, res, next) => {
   try {
@@ -20,7 +21,7 @@ router.get('/guest', async (req, res, next) => {
         jwtHelpers.sign(user),
         cookieConstants
       )
-      res.redirect(res.locals.redirect)
+      res.redirect(global.redirect)
     } else {
       res.status(401).send()
     }
@@ -41,18 +42,10 @@ router.get(
     failureMessage: true
   }),
   (req, res) => {
-    const user = {
-      id: req.user.id,
-      username: req.user.username,
-      provider: 'github',
-      email: null
-    }
-    try {
-      user.email = req.user.emails[0].value
-    } catch {}
+    const user = authHelpers.cookie(req.user, 'github')
 
     res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
-    res.redirect(res.locals.redirect)
+    res.redirect(global.redirect)
   }
 )
 
@@ -68,19 +61,10 @@ router.get(
     failureMessage: true
   }),
   (req, res) => {
-    console.log(req.user)
-    const user = {
-      id: req.user.id,
-      username: req.user.username,
-      provider: 'microsoft',
-      email: null
-    }
-    try {
-      user.email = req.user.emails[0].value
-    } catch {}
+    const user = authHelpers.cookie(req.user, 'microsoft')
 
     res.cookie(process.env.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
-    res.redirect(res.locals.redirect)
+    res.redirect(global.redirect)
   }
 )
 

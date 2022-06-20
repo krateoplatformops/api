@@ -8,20 +8,22 @@ const { envConstants } = require('../constants')
 const uriHelpers = require('../helpers/uri.helpers')
 
 module.exports = async (req, res, next) => {
+  const { id, redirect } = req.query
   if (
     req.path.indexOf('/auth/') > -1 &&
     req.path.indexOf('/callback') === -1 &&
-    req.path.indexOf('/logout') === -1
+    req.path.indexOf('/logout') === -1 &&
+    id &&
+    redirect
   ) {
-    const { id, redirect } = req.query
-
     if (!id) {
       return res.status(400).json({ message: 'Missing id param' })
     }
     if (!redirect && req.method === 'GET') {
       return res.status(400).json({ message: 'Missing redirect param' })
     }
-    res.locals.redirect = redirect
+
+    global.redirect = redirect
 
     const url = uriHelpers.concatUrl([envConstants.AUTH_URI, 'provider', id])
     const doc = await axios.get(url)
