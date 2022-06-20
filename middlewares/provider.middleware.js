@@ -13,8 +13,7 @@ module.exports = async (req, res, next) => {
     req.path.indexOf('/auth/') > -1 &&
     req.path.indexOf('/callback') === -1 &&
     req.path.indexOf('/logout') === -1 &&
-    id &&
-    redirect
+    id
   ) {
     if (!id) {
       return res.status(400).json({ message: 'Missing id param' })
@@ -22,8 +21,9 @@ module.exports = async (req, res, next) => {
     if (!redirect && req.method === 'GET') {
       return res.status(400).json({ message: 'Missing redirect param' })
     }
-
-    global.redirect = redirect
+    if (redirect) {
+      global.redirect = redirect
+    }
 
     const url = uriHelpers.concatUrl([envConstants.AUTH_URI, 'provider', id])
     const doc = await axios.get(url)
