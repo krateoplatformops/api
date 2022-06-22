@@ -13,7 +13,7 @@ router.post(
     const user = {
       id: res.req.user.uid,
       displayName: res.req.user.displayName,
-      username: res.req.user.username,
+      username: res.req.user.username || res.req.user.uid,
       provider: 'ldap',
       email: null
     }
