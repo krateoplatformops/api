@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
       throw new Error(`Unsupported file name ${fileName}`)
     }
 
-    logger.debug(JSON.stringify(save.data))
+    logger.debug(save.data)
 
     if (save) {
       res.status(200).json({ ...save.data, kind })

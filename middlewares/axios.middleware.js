@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     Expires: '0'
   }
 
-  logger.debug(JSON.stringify(res.locals.identity))
+  logger.debug(res.locals.identity)
 
   if (res.locals.identity) {
     payload = { ...payload, identity: JSON.stringify(res.locals.identity) }

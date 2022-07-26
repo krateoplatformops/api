@@ -45,7 +45,7 @@ router.get(
   (req, res) => {
     const user = authHelpers.cookie(req.user, 'github')
 
-    logger.info(JSON.stringify(user, null, 2))
+    logger.info(user)
 
     res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
     res.redirect(global.redirect)
@@ -66,7 +66,7 @@ router.get(
   (req, res) => {
     const user = authHelpers.cookie(req.user, 'microsoft')
 
-    logger.info(JSON.stringify(user, null, 2))
+    logger.info(user)
 
     res.cookie(process.env.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
     res.redirect(global.redirect)

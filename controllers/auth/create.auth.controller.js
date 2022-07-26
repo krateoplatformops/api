@@ -23,7 +23,7 @@ router.post(
         : res.req.user.mail
     } catch {}
 
-    logger.info(JSON.stringify(user, null, 2))
+    logger.info(user)
 
     res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
     res.status(200).send(user)
@@ -39,7 +39,7 @@ router.post('/basic', (req, res) => {
     email: `${req.body.username}@krateo.io`
   }
 
-  logger.info(JSON.stringify(user, null, 2))
+  logger.info(user)
 
   res.cookie(envConstants.COOKIE_NAME, jwtHelpers.sign(user), cookieConstants)
   res.status(200).send(user)

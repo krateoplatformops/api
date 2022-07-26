@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     return
   }
 
-  logger.debug(JSON.stringify(res.locals.identity))
+  logger.debug(res.locals.identity)
 
   if (!res.locals.identity) {
     const err = new Error('Unauthorized')

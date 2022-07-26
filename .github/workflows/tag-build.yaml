@@ -67,6 +67,7 @@ jobs:
       - name: Webhook
         uses: indiesdev/curl@v1.1
         with:
+          timeout: 5000
           url: ${{ secrets.WEBHOOK_URL }}
           method: "POST"
           headers: '{ "x-token": "${{ secrets.WEBHOOK_TOKEN }}" }'

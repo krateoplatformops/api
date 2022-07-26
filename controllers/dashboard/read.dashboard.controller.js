@@ -39,7 +39,7 @@ router.get('/', async (req, res, next) => {
       })
     }
 
-    logger.debug(JSON.stringify(response))
+    logger.debug(response)
 
     res.status(200).json(response)
   } catch (error) {
