@@ -19,7 +19,7 @@ router.all('/:id/plugins/:plugin/:name', async (req, res, next) => {
     Object.keys(req.query).forEach((key) =>
       url.searchParams.append(key, req.query[key])
     )
-    url.searchParams.append('identity', res.locals.identity.id)
+    url.searchParams.append('identity', res.locals.identity.username)
     logger.debug(`GET ${url.toString()}`)
 
     const plugin = await axiosInstance({
